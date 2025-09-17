@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+
+@theme inline {
+  --color-background-base: #121212;
+  --color-background-highlight: #242424;
+  --color-background-subdued: #000000;
+  --color-foreground-base: #FFFFFF;
+  --color-foreground-subdued: #FFFFFF99;
+  --color-accent: #E1C340;
+  --color-yes: #15803D; 
+  --color-no: #EF4444; 
+}
+
+@font-face {
+  font-family: FutureTense;
+  src: url("/fonts/FutureTense-Regular.woff2") format("woff2");
+}
+
+@theme {
+  --font-futuretense: FutureTense, sans-serif;
+  --font-montserrat: "Montserrat", sans-serif; 
+}
+
+button { @apply text-2xl font-montserrat; }
+h1 { @apply text-4xl uppercase font-futuretense; }
+p { @apply text-3xl font-montserrat; }
+
+form:has(button) {
+    @apply w-fit bg-accent px-4 py-2 rounded-2xl flex flex-row items-center justify-center;
+}
