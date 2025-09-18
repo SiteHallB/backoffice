@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import { handleUpload, type HandleUploadBody } from '@vercel/blob/client';
 
 const SLOTS = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'] as const;
-const ALLOWED_CT = ['image/svg']; // ajoute 'image/svg+xml' si tu en veux
+const ALLOWED_CT = ['image/svg+xml']; // ajoute 'image/svg+xml' si tu en veux
 
 export async function POST(req: Request) {
   const body = (await req.json()) as HandleUploadBody;
