@@ -37,7 +37,7 @@ export default function UploadSection() {
     return (
         <section>
             <form onSubmit={onSubmit}>
-                <input ref={inputRef} type="file" accept="image/svg" required />
+                <input ref={inputRef} type="file" accept="image/svg+xml" required />
                 <button type="submit" disabled={uploading} style={{ marginLeft: 8 }}>
                 {uploading ? 'Upload…' : 'Uploader'}
                 </button>
