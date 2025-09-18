@@ -15,7 +15,7 @@ export async function POST(req: Request) {
             }
             // 2) options de sécurité/validation
             return {
-            allowedContentTypes: ['image/jpeg', 'image/png', 'image/webp'],
+            allowedContentTypes: ['image/svg+xml'],
             addRandomSuffix: true,               // évite les collisions de noms
             tokenPayload: JSON.stringify({ uploadedAt: Date.now() }),
             // callbackUrl: process.env.VERCEL_BLOB_CALLBACK_URL, // pour tests callback en local via tunnel
