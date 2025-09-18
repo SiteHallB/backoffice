@@ -1,35 +1,44 @@
+// src/app/api/blob/upload-slot/route.ts
 import { NextResponse } from 'next/server';
 import { handleUpload, type HandleUploadBody } from '@vercel/blob/client';
 
+const SLOTS = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'] as const;
+const ALLOWED_CT = ['image/svg']; // ajoute 'image/svg+xml' si tu en veux
+
 export async function POST(req: Request) {
-    try {
-        const body = (await req.json()) as HandleUploadBody;
+  const body = (await req.json()) as HandleUploadBody;
 
-        const json = await handleUpload({
-        body,
-        request: req,
-        onBeforeGenerateToken: async (pathname /*, clientPayload */) => {
-            // 1) restreindre le dossier
-            if (!pathname.startsWith('images/')) {
-            throw new Error('Uploads limités au préfixe images/');
-            }
-            // 2) options de sécurité/validation
-            return {
-            allowedContentTypes: ['image/svg+xml'],
-            addRandomSuffix: true,               // évite les collisions de noms
-            tokenPayload: JSON.stringify({ uploadedAt: Date.now() }),
-            // callbackUrl: process.env.VERCEL_BLOB_CALLBACK_URL, // pour tests callback en local via tunnel
-            };
-        },
-        onUploadCompleted: async ({ blob, tokenPayload }) => {
-            // Appelé par Vercel quand l’upload se termine (en prod automatiquement)
-            // Ici, tu peux persister blob.url + méta en BDD si besoin.
-            console.log('Upload OK:', blob.url, tokenPayload);
-        },
-        });
+  try {
+    const json = await handleUpload({
+      body,
+      request: req,
+      onBeforeGenerateToken: async (pathname, clientPayload) => {
+        // 1) On attend un chemin du type "slots/<slot>.<ext>"
+        const okPrefix = pathname.startsWith('slots/');
+        const slot = pathname.replace(/^slots\//, '').split('.')[0];
 
-        return NextResponse.json(json);
-    } catch (err: any) {
-        return NextResponse.json({ error: err?.message ?? 'Upload error' }, { status: 400 });
-    }
+        if (!okPrefix || !SLOTS.includes(slot as any)) {
+          throw new Error('Slot invalide');
+        }
+
+        return {
+          // 2) Sécurité type MIME
+          allowedContentTypes: ALLOWED_CT,
+          // 3) On veut réécrire le même fichier à chaque remplacement
+          addRandomSuffix: false,
+          allowOverwrite: true,              // <— autorise l’écrasement
+          cacheControlMaxAge: 60,            // <— CDN <= 60s pour refléter le nouveau contenu
+          tokenPayload: JSON.stringify({ slot }),
+        };
+      },
+      onUploadCompleted: async ({ blob, tokenPayload }) => {
+        console.log('Upload OK:', blob.pathname, 'meta:', tokenPayload);
+        // (Optionnel) Tu peux pinger un revalidateTag si tu caches des pages.
+      },
+    });
+
+    return NextResponse.json(json);
+  } catch (err: any) {
+    return NextResponse.json({ error: err?.message ?? 'Upload error' }, { status: 400 });
+  }
 }

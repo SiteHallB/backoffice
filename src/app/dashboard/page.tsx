@@ -1,7 +1,7 @@
 import SignoutButton from "@/components/login/signout-button";
 import getUsername from "@/components/login/get-username";
 
-import UploadSection from "@/components/upload-form";
+import SlotUploader from "@/components/slot-uploader";
 
 export default function Page() {
     return (
@@ -12,7 +12,7 @@ export default function Page() {
                 <div className="bg-background-highlight text-accent px-4 py-2"><p>#242424</p></div>
             </div>
             <SignoutButton/>
-            <UploadSection/>
+            <SlotUploader slot="lundi"/>
         </div>
     );
 }
