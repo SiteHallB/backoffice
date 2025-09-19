@@ -2,14 +2,15 @@
 
 import { useRef, useState } from 'react';
 import { upload } from '@vercel/blob/client';
+import { Slot } from '@/slots';
+import Image from 'next/image';
 
 export default function SlotUploader({ slot }:{
-    slot: 'lundi'|'mardi'|'mercredi'|'jeudi'|'vendredi'|'samedi',
+    slot: Slot
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string|null>(null);
-  const [lastUrl, setLastUrl] = useState<string|undefined>(undefined);
 
   return (
     <form
@@ -27,7 +28,6 @@ export default function SlotUploader({ slot }:{
             // (optionnel) clientPayload: JSON.stringify({ slot }),
           });
 
-          setLastUrl(res.url);            // aperçu succès
           if (inputRef.current) inputRef.current.value = '';
         } catch (e:any) {
           setErr(e?.message ?? 'Erreur inconnue');
@@ -41,7 +41,7 @@ export default function SlotUploader({ slot }:{
       <input ref={inputRef} type="file" accept='image/svg+xml' required />
       <button disabled={busy}>{busy ? 'Remplacement…' : 'Remplacer'}</button>
       {err && <small style={{color:'crimson'}}>Erreur : {err}</small>}
-      {lastUrl && <img src={lastUrl} alt={slot} style={{maxWidth:240,borderRadius:8}} />}
+      <Image src={`https://jqhzp9eir7a7e8vc.public.blob.vercel-storage.com/slots/${slot}.svg`} alt="" width={1600} height={900}/>
     </form>
   );
 }

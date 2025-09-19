@@ -1,8 +1,8 @@
 // src/app/api/blob/upload-slot/route.ts
 import { NextResponse } from 'next/server';
+import { SLOTS } from '@/slots';
 import { handleUpload, type HandleUploadBody } from '@vercel/blob/client';
 
-const SLOTS = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'] as const;
 const ALLOWED_CT = ['image/svg+xml']; // ajoute 'image/svg+xml' si tu en veux
 
 export async function POST(req: Request) {
