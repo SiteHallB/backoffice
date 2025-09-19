@@ -6,7 +6,7 @@ import { SLOTS } from "@/slots";
 
 export default function Page() {
     return (
-        <div className="w-full h-full bg-background-base flex flex-col items-center gap-2">
+        <div className="w-full bg-background-base flex flex-col items-center gap-2 py-4 overflow-hidden">
             <div className="w-full flex flex-wrap justify-between items-center gap-2 px-4 py-2">
                 <p className="text-foreground-subdued">Bienvenue, {getUsername()}</p>
                 <p className="text-foreground-base">La mise à jour des photos sur le site et le backoffice peuvent mettre jusqu'à 60s</p>
