@@ -14,7 +14,7 @@ export default function RootLayout({
     return (
         <html lang="en">
         <body
-            className="antialiased w-screen h-screen flex flex-col"
+            className="antialiased w-full h-full flex flex-col"
         >
             <Bar/>
             {children}
