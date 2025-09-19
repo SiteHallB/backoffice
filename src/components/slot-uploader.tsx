@@ -52,7 +52,7 @@ export default function SlotUploader({ slot }:{
         alt=""
         width={300}
         height={300}
-        className="w-auto h-full object-cover"
+        className="h-full object-cover"
       />
       </div>
     </form>
