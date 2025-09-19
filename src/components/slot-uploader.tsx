@@ -40,7 +40,7 @@ export default function SlotUploader({ slot }:{
       className="w-full max-h-150 flex flex-col items-center justify-center gap-2 p-4 bg-background-highlight rounded-2xl"
     >
       <div className="w-full flex flex-wrap items-center justify-center gap-x-2 gap-y-1 p-2 bg-foreground-subdued rounded-lg">
-        <label className="flex items-center justify-center p-1 rounded-lg">{slot}</label>
+        <label className="font-futuretense uppercase">{slot}</label>
         <input className="flex items-center justify-center p-1" ref={inputRef} type="file" accept='image/svg+xml' required />
         <button className="flex items-center justify-center p-1 border rounded-lg border-background-highlight" disabled={busy}>{busy ? 'Remplacement…' : 'Remplacer'}</button>
       </div>
