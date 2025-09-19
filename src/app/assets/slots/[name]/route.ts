@@ -5,16 +5,12 @@ import { SLOTS } from "@/slots";
 
 export async function GET(
   request: NextRequest,
-  context: {
-    params: { name: string }
-  }
+  { params }: { params: { name: string } }
 ) {
-    const { name } = context.params
-
     try {
-        if (!SLOTS.includes(name as any)) throw new Error('Slot invalide');
+        if (!SLOTS.includes(params.name as any)) throw new Error('Slot invalide');
 
-        const meta = await head(`slots/${name}`);
+        const meta = await head(`slots/${params.name}`);
 
         return NextResponse.redirect(meta.url, 302);
     } catch (e) {
