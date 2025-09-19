@@ -12,7 +12,6 @@ export default function SlotUploader({ slot }:{
   const inputRef = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string|null>(null);
-  const [rev, setRev] = useState(0);          // révision pour bust le cache
 
   return (
     <form
@@ -32,27 +31,30 @@ export default function SlotUploader({ slot }:{
           });
 
           if (inputRef.current) inputRef.current.value = '';
-
-          setRev(Date.now());
         } catch (e:any) {
           setErr(e?.message ?? 'Erreur inconnue');
         } finally {
           setBusy(false);
         }
       }}
-      style={{ display:'grid', gap:8 }}
+      className="flex flex-col items-center justify-center gap-2 p-4 bg-background-highlight rounded-2xl"
     >
-      <label><b>{slot}</b></label>
-      <input ref={inputRef} type="file" accept='image/svg+xml' required />
-      <button disabled={busy}>{busy ? 'Remplacement…' : 'Remplacer'}</button>
+      <div className="flex flex-wrap gap-x-2 p-2 bg-foreground-subdued rounded-lg">
+        <label className="p-1 border border-rounded border-background-highlight"><b>{slot}</b></label>
+        <input className="p-1 border border-rounded border-background-highlight" ref={inputRef} type="file" accept='image/svg+xml' required />
+        <button className="p-1 border border-rounded border-background-highlight" disabled={busy}>{busy ? 'Remplacement…' : 'Remplacer'}</button>
+      </div>
       {err && <small style={{color:'crimson'}}>Erreur : {err}</small>}
+
+      <div className="p-2 bg-background-highlight rounded-lg overflow-hidden">
       <Image
-        src={`https://jqhzp9eir7a7e8vc.public.blob.vercel-storage.com/slots/${slot}.svg?v=${rev}`}
+        src={`https://jqhzp9eir7a7e8vc.public.blob.vercel-storage.com/slots/${slot}.svg`}
         alt=""
         width={300}
         height={300}
-        key={rev}
+        className="w-full h-auto object-cover"
       />
+      </div>
     </form>
   );
 }
