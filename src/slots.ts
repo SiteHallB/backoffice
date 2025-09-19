@@ -1,1 +1,1 @@
-export const SLOTS = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'];
+export const SLOTS = ['bureau', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'aqua_bureau', 'aqua_lundi', 'aqua_mardi', 'aqua_mercredi', 'aqua_jeudi', 'aqua_vendredi' ];
