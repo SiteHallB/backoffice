@@ -37,7 +37,7 @@ export default function SlotUploader({ slot }:{
           setBusy(false);
         }
       }}
-      className="w-full max-h-100 flex flex-col items-center justify-center gap-2 p-4 bg-background-highlight rounded-2xl"
+      className="w-full max-h-150 flex flex-col items-center justify-center gap-2 p-4 bg-background-highlight rounded-2xl"
     >
       <div className="w-full flex flex-wrap items-center justify-center gap-x-2 gap-y-1 p-2 bg-foreground-subdued rounded-lg">
         <label className="flex items-center justify-center p-1 rounded-lg">{slot}</label>
@@ -52,7 +52,7 @@ export default function SlotUploader({ slot }:{
         alt=""
         width={300}
         height={300}
-        className="h-full w-auto"
+        className="h-full"
       />
       </div>
     </form>
