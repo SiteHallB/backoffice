@@ -1,12 +1,20 @@
 import { NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import { head } from "@vercel/blob";
 import { SLOTS } from "@/slots";
 
-export async function GET(_: Request, { params }: { params: { name: string } }) {
-    try {
-        if (!SLOTS.includes(params.name as any)) throw new Error('Slot invalide');
+export async function GET(
+  request: NextRequest,
+  context: {
+    params: { name: string }
+  }
+) {
+    const { name } = context.params
 
-        const meta = await head(`slots/${params.name}`);
+    try {
+        if (!SLOTS.includes(name as any)) throw new Error('Slot invalide');
+
+        const meta = await head(`slots/${name}`);
 
         return NextResponse.redirect(meta.url, 302);
     } catch (e) {
