@@ -37,16 +37,16 @@ export default function SlotUploader({ slot }:{
           setBusy(false);
         }
       }}
-      className="flex flex-col items-center justify-center gap-2 p-4 bg-background-highlight rounded-2xl"
+      className="w-full flex flex-col items-center justify-center gap-2 p-4 bg-background-highlight rounded-2xl"
     >
-      <div className="flex flex-wrap gap-x-2 p-2 bg-foreground-subdued rounded-lg">
+      <div className="w-full flex flex-wrap gap-x-2 p-2 bg-foreground-subdued rounded-lg">
         <label className="p-1 border border-rounded border-background-highlight"><b>{slot}</b></label>
         <input className="p-1 border border-rounded border-background-highlight" ref={inputRef} type="file" accept='image/svg+xml' required />
         <button className="p-1 border border-rounded border-background-highlight" disabled={busy}>{busy ? 'Remplacement…' : 'Remplacer'}</button>
       </div>
       {err && <small style={{color:'crimson'}}>Erreur : {err}</small>}
 
-      <div className="p-2 bg-background-highlight rounded-lg overflow-hidden">
+      <div className="w-full p-2 bg-background-highlight rounded-lg overflow-hidden">
       <Image
         src={`https://jqhzp9eir7a7e8vc.public.blob.vercel-storage.com/slots/${slot}.svg`}
         alt=""
