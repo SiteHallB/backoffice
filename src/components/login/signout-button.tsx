@@ -7,6 +7,7 @@ export default function SignOut() {
                 "use server"
                 await signOut()
             }}
+            className="form"
         >
             <button type="submit">Se déconnecter</button>
         </form>

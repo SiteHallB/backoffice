@@ -7,6 +7,7 @@ export default function SigninButton() {
                 "use server"
                 await signIn("google", { redirectTo: "/dashboard" })
             }}
+            className="form"
         >
             <button type="submit">Se connecter avec Google</button>
         </form>
