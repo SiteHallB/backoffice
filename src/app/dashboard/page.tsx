@@ -2,6 +2,7 @@ import SignoutButton from "@/components/login/signout-button";
 import getUsername from "@/components/login/get-username";
 
 import SlotUploader from "@/components/slot-uploader";
+import { SLOTS } from "@/slots";
 
 export default function Page() {
     return (
@@ -12,7 +13,9 @@ export default function Page() {
                 <div className="bg-background-highlight text-accent px-4 py-2"><p>#242424</p></div>
             </div>
             <SignoutButton/>
-            <SlotUploader slot="lundi"/>
+            {SLOTS.map((slot) => (
+                <SlotUploader key={slot} slot={slot}/>
+            ))}
         </div>
     );
 }
