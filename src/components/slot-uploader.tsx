@@ -48,7 +48,7 @@ export default function SlotUploader({ slot }:{
 
       <div className="w-full h-full p-2 bg-background-highlight rounded-lg overflow-hidden">
       <Image
-        src={`https://jqhzp9eir7a7e8vc.public.blob.vercel-storage.com/slots/${slot}.svg`}
+        src={`https://backoffice-two-phi.vercel.app/assets/slots/${slot}.svg`}
         alt=""
         width={300}
         height={300}
