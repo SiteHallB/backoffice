@@ -47,11 +47,8 @@ export default function SlotUploader({ slot }:{
       {err && <small style={{color:'crimson'}}>Erreur : {err}</small>}
 
       <div className="w-full h-full p-2 bg-background-highlight rounded-lg overflow-hidden">
-      <Image
+      <img
         src={`https://backoffice-two-phi.vercel.app/assets/slots/${slot}`}
-        alt=""
-        width={300}
-        height={300}
         className="h-full"
       />
       </div>
