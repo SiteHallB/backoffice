@@ -4,14 +4,12 @@ import { SLOTS } from "@/slots";
 
 export async function GET(
     request: Request,
-    { params }: { params: Promise<{ name: string }> }
+    params: { name: string }
 ) {
-    const { name } = await params
-
     try {
-            if (!SLOTS.includes(name as any)) throw new Error('Slot invalide');
+            if (!SLOTS.includes(params.name as any)) throw new Error('Slot invalide');
 
-            const meta = await head(`slots/${name}`);
+            const meta = await head(`slots/${params.name}.svg`);
 
             return NextResponse.redirect(meta.url, 302);
         } catch (e) {
