@@ -13,8 +13,14 @@ export async function GET(
 
         console.log('Redirige vers le slot', slot);
         const meta = await head(`slots/${slot}.svg`);
+        const r = await fetch(meta.url, { cache: "no-store" });
 
-        return NextResponse.redirect(meta.url, 302);
+        return new NextResponse(r.body, {
+        headers: {
+            "content-type": meta.contentType ?? "application/octet-stream",
+            "cache-control": "public, max-age=60, s-maxage=60, stale-while-revalidate=86400",
+        },
+    });
     } catch (e) {
         return NextResponse.json({ error: 'Slot introuvable' }, { status: 404 });
     }
