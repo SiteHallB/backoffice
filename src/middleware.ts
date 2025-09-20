@@ -4,7 +4,14 @@ import { authConfig } from './auth.config';
 export default NextAuth(authConfig).auth;
  
 export const config = {
-    // https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher
-    matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
+    matcher: [
+    // Généré par CHAT GPT
+    // protège tout sauf :
+    //  - /assets/*  → passerelle d'images publique
+    //  - _next/*    → fichiers internes Next
+    //  - fichiers publics usuels (favicon, robots, etc.)
+    //  - "/"        → page de login (sinon boucle)
+    '/((?!assets/|_next/|favicon.ico|robots.txt|sitemap.xml|manifest.webmanifest|apple-touch-icon.*|icon.*|$).*)',
+  ],
     runtime: 'nodejs',
 };
